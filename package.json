@@ -1,0 +1,20 @@
+{
+  "name": "Snake",
+  "version": "1.0.0",
+  "description": "This repository contains code for a simple snake game in JavaScript.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jumperxd2/Snake.git"
+  },
+  "keywords": [],
+  "author": "Eli Gaitley <ceg111@live.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jumperxd2/Snake/issues"
+  },
+  "homepage": "https://github.com/Jumperxd2/Snake#readme"
+}
