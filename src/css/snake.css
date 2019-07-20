@@ -20,3 +20,7 @@ html {
 #board .snake {
     background-color: green;
 }
+
+#board .apple {
+    background-color: red;
+}

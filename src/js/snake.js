@@ -7,6 +7,13 @@ var snakeY
 var snakeDirection
 var snakeLength
 
+function placeApple () {
+  const appleX = Math.floor(Math.random() * boardWidth)
+  const appleY = Math.floor(Math.random() * boardHeight)
+
+  board[appleY][appleX].apple = 1
+}
+
 function wallHit () {
   return snakeX < 0 || snakeY < 0 || snakeX >= boardWidth || snakeY >= boardHeight
 }
@@ -33,7 +40,17 @@ function gameLoop () {
 
   if (wallHit()) {
     startGame()
-  }
+  } // End if
+
+  if (board[snakeY][snakeX].snake > 0) {
+    startGame()
+  } // End if
+
+  if (board[snakeY][snakeX].apple === 1) {
+    snakeLength++
+    board[snakeY][snakeX].apple = 0
+    placeApple()
+  } // End if
 
   board[snakeY][snakeX].snake = snakeLength
 
@@ -44,19 +61,22 @@ function gameLoop () {
       if (cell.snake > 0) {
         cell.element.className = 'snake'
         cell.snake--
+      } else if (cell.apple === 1) {
+        cell.element.className = 'apple'
       } else {
         cell.element.className = ''
       } // End if
     } // End for
   } // End for
 
-  setTimeout(gameLoop, 1000 / snakeLength)
+  setTimeout(gameLoop, 200)
 } // End gameLoop
 
 function startGame () {
   for (let y = 0; y < boardHeight; y++) {
     for (let x = 0; x < boardWidth; x++) {
       board[y][x].snake = 0
+      board[y][x].apple = 0
     } // End for
   } // End for
 
@@ -66,6 +86,8 @@ function startGame () {
   snakeDirection = 'Up'
 
   board[snakeY][snakeX].snake = snakeLength
+
+  placeApple()
 
   gameLoop()
 } // End startGame
@@ -78,7 +100,8 @@ function initGame () {
 
     for (let x = 0; x < boardWidth; x++) {
       const cell = {
-        snake: 0
+        snake: 0,
+        apple: 0
       }
 
       cell.element = document.createElement('div')
