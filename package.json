@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/Jumperxd2/Snake/issues"
   },
-  "homepage": "https://github.com/Jumperxd2/Snake#readme"
+  "homepage": "https://github.com/Jumperxd2/Snake#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "standard": "^13.0.2"
+  }
 }
