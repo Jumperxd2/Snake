@@ -8,22 +8,28 @@ var snakeDirection
 var snakeLength
 
 function placeApple () {
-  const appleX = Math.floor(Math.random() * boardWidth)
-  const appleY = Math.floor(Math.random() * boardHeight)
+  let appleX
+  let appleY
+
+  // Prevent apple from spawning on snake.
+  do {
+    appleX = Math.floor(Math.random() * boardWidth)
+    appleY = Math.floor(Math.random() * boardHeight)
+  } while (board[appleY][appleX].snake !== 0)
 
   board[appleY][appleX].apple = 1
-}
+} // End placeApple
 
 function wallHit () {
   return snakeX < 0 || snakeY < 0 || snakeX >= boardWidth || snakeY >= boardHeight
-}
+} // End wallHit
 
 function keyPress (event) {
   switch (event.key) {
-    case 'ArrowUp': snakeDirection = 'Up'; break
-    case 'ArrowDown': snakeDirection = 'Down'; break
-    case 'ArrowLeft': snakeDirection = 'Left'; break
-    case 'ArrowRight': snakeDirection = 'Right'; break
+    case 'ArrowUp': snakeDirection = snakeDirection === 'Down' ? 'Down' : 'Up'; break
+    case 'ArrowDown': snakeDirection = snakeDirection === 'Up' ? 'Up' : 'Down'; break
+    case 'ArrowLeft': snakeDirection = snakeDirection === 'Right' ? 'Right' : 'Left'; break
+    case 'ArrowRight': snakeDirection = snakeDirection === 'Left' ? 'Left' : 'Right'; break
     default: return
   } // End Switch
 
@@ -69,7 +75,7 @@ function gameLoop () {
     } // End for
   } // End for
 
-  setTimeout(gameLoop, 200)
+  setTimeout(gameLoop, 150)
 } // End gameLoop
 
 function startGame () {
@@ -102,7 +108,7 @@ function initGame () {
       const cell = {
         snake: 0,
         apple: 0
-      }
+      } // End cell
 
       cell.element = document.createElement('div')
       boardDiv.appendChild(cell.element)
